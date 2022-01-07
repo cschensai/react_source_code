@@ -311,6 +311,7 @@ function commitBeforeMutationLifeCycles(
   }
 }
 
+// cs-log 对effect tag进行操作
 function commitHookEffectList(
   unmountTag: number,
   mountTag: number,
@@ -322,6 +323,7 @@ function commitHookEffectList(
     const firstEffect = lastEffect.next;
     let effect = firstEffect;
     do {
+      // cs-log unmount阶段执行tag不等于NoHookEffect的清除函数（如果有的话）
       if ((effect.tag & unmountTag) !== NoHookEffect) {
         // Unmount
         const destroy = effect.destroy;
@@ -330,6 +332,7 @@ function commitHookEffectList(
           destroy();
         }
       }
+      // cs-log mount阶段执行所有tag不等于NoHookEffect的effect.create的函数，将其返回函数赋值给destory属性，以便unmount执行
       if ((effect.tag & mountTag) !== NoHookEffect) {
         // Mount
         const create = effect.create;

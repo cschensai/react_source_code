@@ -591,6 +591,7 @@ function updateFunctionComponent(
     }
     setCurrentPhase(null);
   } else {
+    // cs-log 更新组件时 renderWithHooks
     nextChildren = renderWithHooks(
       current,
       workInProgress,
@@ -1195,6 +1196,7 @@ function mountIndeterminateComponent(
       renderExpirationTime,
     );
   } else {
+    // cs-log 挂载组件时的renderWithHooks
     value = renderWithHooks(
       null,
       workInProgress,
